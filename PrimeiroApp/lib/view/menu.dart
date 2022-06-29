@@ -15,6 +15,7 @@ class Menu extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Botões'),
+        backgroundColor: Colors.black,
       ),
       body: Center(
         child: Column(
@@ -34,6 +35,7 @@ class Menu extends StatelessWidget {
                       return HelloWord();
                     }))),
             criarBotao(
+
                 'Calculadora',
                 () => Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
