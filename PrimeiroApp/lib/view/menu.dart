@@ -7,7 +7,7 @@ class Menu extends StatelessWidget {
   const Menu({Key? key}) : super(key: key);
 
   Widget criarBotao(String nomeBotao, VoidCallback? acaoBotao) {
-    return ElevatedButton(onPressed: acaoBotao, child: Text(nomeBotao));
+    return ElevatedButton(onPressed: acaoBotao, child: Text(nomeBotao),  );
   }
 
   @override
@@ -21,7 +21,8 @@ class Menu extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            criarBotao('Olá Mundo!', () => print('Hello word!!!')),
+
+            criarBotao('Olá Mundo!', () => print('Hello word!!!'),),
             criarBotao(
                 'Calcular Idade',
                 () => Navigator.push(context,
@@ -46,4 +47,6 @@ class Menu extends StatelessWidget {
       ),
     );
   }
+
+
 }

@@ -22,7 +22,7 @@ class _CalculadoraState extends State<Calculadora> {
     return Container(
       child: RaisedButton(
         onPressed: () {
-          calculation(TextBotao);
+          calculadora(TextBotao);
         },
         child: Text(
           TextBotao,
@@ -58,7 +58,7 @@ class _CalculadoraState extends State<Calculadora> {
                 Padding(
                   padding: EdgeInsets.all(10.0),
                   child: Text(
-                    text,
+                    texto,
                     textAlign: TextAlign.left,
                     style: TextStyle(color: Colors.white, fontSize: 100),
                   ),
@@ -135,109 +135,109 @@ class _CalculadoraState extends State<Calculadora> {
     );
   }
 
-  dynamic text = '0';
-  double numOne = 0;
-  double numTwo = 0;
+  dynamic texto = '0';
+  double primeiroNumero = 0;
+  double segundoNumero = 0;
 
-  dynamic result = '';
-  dynamic finalResult = '';
-  dynamic opr = '';
-  dynamic preOpr = '';
-  void calculation(TextBotao) {
+  dynamic resultado = '';
+  dynamic resultadoFinal = '';
+  dynamic operacao = '';
+  dynamic preOperacao = '';
+  void calculadora(TextBotao) {
     if (TextBotao == 'AC') {
-      text = '0';
-      numOne = 0;
-      numTwo = 0;
-      result = '';
-      finalResult = '0';
-      opr = '';
-      preOpr = '';
-    } else if (opr == '=' && TextBotao == '=') {
-      if (preOpr == '+') {
-        finalResult = add();
-      } else if (preOpr == '-') {
-        finalResult = sub();
-      } else if (preOpr == 'x') {
-        finalResult = mul();
-      } else if (preOpr == '/') {
-        finalResult = div();
+      texto = '0';
+      primeiroNumero = 0;
+      segundoNumero = 0;
+      resultado = '';
+      resultadoFinal = '0';
+      operacao = '';
+      preOperacao = '';
+    } else if (operacao == '=' && TextBotao == '=') {
+      if (preOperacao == '+') {
+        resultadoFinal = add();
+      } else if (preOperacao == '-') {
+        resultadoFinal = sub();
+      } else if (preOperacao == 'x') {
+        resultadoFinal = mul();
+      } else if (preOperacao == '/') {
+        resultadoFinal = div();
       }
     } else if (TextBotao == '+' ||
         TextBotao == '-' ||
         TextBotao == 'x' ||
         TextBotao == '/' ||
         TextBotao == '=') {
-      if (numOne == 0) {
-        numOne = double.parse(result);
+      if (primeiroNumero == 0) {
+        primeiroNumero = double.parse(resultado);
       } else {
-        numTwo = double.parse(result);
+        segundoNumero = double.parse(resultado);
       }
 
-      if (opr == '+') {
-        finalResult = add();
-      } else if (opr == '-') {
-        finalResult = sub();
-      } else if (opr == 'x') {
-        finalResult = mul();
-      } else if (opr == '/') {
-        finalResult = div();
+      if (operacao == '+') {
+        resultadoFinal = add();
+      } else if (operacao == '-') {
+        resultadoFinal = sub();
+      } else if (operacao == 'x') {
+        resultadoFinal = mul();
+      } else if (operacao == '/') {
+        resultadoFinal = div();
       }
-      preOpr = opr;
-      opr = TextBotao;
-      result = '';
+      preOperacao = operacao;
+      operacao = TextBotao;
+      resultado = '';
     } else if (TextBotao == '%') {
-      result = numOne / 100;
-      finalResult = doesContainDecimal(result);
+      resultado = primeiroNumero / 100;
+      resultadoFinal = doesContainDecimal(resultado);
     } else if (TextBotao == '.') {
-      if (!result.toString().contains('.')) {
-        result = result.toString() + '.';
+      if (!resultado.toString().contains('.')) {
+        resultado = resultado.toString() + '.';
       }
-      finalResult = result;
+      resultadoFinal = resultado;
     } else if (TextBotao == '+/-') {
-      result.toString().startsWith('-')
-          ? result = result.toString().substring(1)
-          : result = '-' + result.toString();
-      finalResult = result;
+      resultado.toString().startsWith('-')
+          ? resultado = resultado.toString().substring(1)
+          : resultado = '-' + resultado.toString();
+      resultadoFinal = resultado;
     } else {
-      result = result + TextBotao;
-      finalResult = result;
+      resultado = resultado + TextBotao;
+      resultadoFinal = resultado;
     }
     setState(() {
-      text = finalResult;
+      texto = resultadoFinal;
     });
   }
 
   String add() {
-    result = (numOne + numTwo).toString();
-    numOne = double.parse(result);
-    return doesContainDecimal(result);
+    resultado = (primeiroNumero + segundoNumero).toString();
+    primeiroNumero = double.parse(resultado);
+    return doesContainDecimal(resultado);
   }
 
   String sub() {
-    result = (numOne - numTwo).toString();
-    numOne = double.parse(result);
-    return doesContainDecimal(result);
+    resultado = (primeiroNumero - segundoNumero).toString();
+    primeiroNumero = double.parse(resultado);
+    return doesContainDecimal(resultado);
   }
 
   String mul() {
-    result = (numOne * numTwo).toString();
-    numOne = double.parse(result);
-    return doesContainDecimal(result);
+    resultado = (primeiroNumero * segundoNumero).toString();
+    primeiroNumero = double.parse(resultado);
+    return doesContainDecimal(resultado);
   }
 
   String div() {
-    result = (numOne / numTwo).toString();
-    numOne = double.parse(result);
-    return doesContainDecimal(result);
+    resultado = (primeiroNumero / segundoNumero).toString();
+    primeiroNumero = double.parse(resultado);
+    return doesContainDecimal(resultado);
   }
 
-  String doesContainDecimal(dynamic result) {
-    if (result.toString().contains('.')) {
-      List<String> splitDecimal = result.toString().split('.');
+  String doesContainDecimal(dynamic resultado) {
+    if (resultado.toString().contains('.')) {
+      List<String> splitDecimal = resultado.toString().split('.');
       if (!(int.parse(splitDecimal[1]) > 0))
-        return result = splitDecimal[0].toString();
+        return resultado = splitDecimal[0].toString();
     }
-    return result;
+    return resultado;
   }
 
 }
