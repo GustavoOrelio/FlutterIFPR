@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:primeiro_app/view/calcular_idade.dart';
+import 'package:primeiro_app/view/hello_word.dart';
 
 class Menu extends StatelessWidget {
   const Menu({Key? key}) : super(key: key);
@@ -26,7 +27,11 @@ class Menu extends StatelessWidget {
                       return CalcularIdade();
                     }))),
             criarBotao(
-                'Hello Word', () => print('Você clicou no terceiro botão')),
+                'Hello Word',
+                () => Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return HelloWord();
+                    }))),
             criarBotao(
                 'Calculadora', () => print('Você clicou no quarto botão')),
           ],
