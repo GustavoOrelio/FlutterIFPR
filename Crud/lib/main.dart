@@ -1,5 +1,6 @@
 import 'package:crud/FormTarefa.dart';
 import 'package:crud/ListaTarefa.dart';
+import 'package:crud/Usuario.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -19,8 +20,9 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         '/' : (context) => ListaTarefa(),
-        '/formTarefa' : (context) => FormTarefa()
-      },
+        '/formTarefa' : (context) => FormTarefa(),
+        '/usuario' : (context) => Usuario()
+      }
     );
   }
 }

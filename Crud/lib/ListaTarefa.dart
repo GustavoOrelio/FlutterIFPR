@@ -4,7 +4,7 @@ import 'package:sqflite/sqflite.dart';
 
 class ListaTarefa extends StatelessWidget {
   Future<List<Map<String, Object?>>> buscarDados() async {
-    String caminho = join(await getDatabasesPath(), 'banco.db');
+    String caminho = join(await getDatabasesPath(), 'tarefa.db');
     Database db = await openDatabase(
       caminho,
       version: 1,
@@ -37,10 +37,16 @@ class ListaTarefa extends StatelessWidget {
         title: const Text('Lista de tarefas'),
         actions: [
           IconButton(
+            padding: EdgeInsets.only(left: 15),
               onPressed: () {
                 Navigator.pushNamed(context, '/formTarefa');
               },
-              icon: Icon(Icons.add))
+              icon: Icon(Icons.add)),
+          IconButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/usuario');
+              },
+              icon: Icon(Icons.account_circle))
         ],
       ),
       body: FutureBuilder(
