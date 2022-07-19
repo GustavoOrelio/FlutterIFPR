@@ -4,7 +4,6 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 class ListaTarefa extends StatelessWidget {
-
   Future<List<Map<String, Object?>>> buscarDados() async {
     String caminho = join(await getDatabasesPath(), 'tarefa.db');
     Database db = await openDatabase(
@@ -25,11 +24,8 @@ class ListaTarefa extends StatelessWidget {
     return lista;
   }
 
-
-
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black87,
@@ -61,12 +57,15 @@ class ListaTarefa extends StatelessWidget {
               return ListTile(
                 title: Text(tarefa['nome'].toString()),
                 subtitle: Text(tarefa['descricao'].toString()),
-                trailing: Container(
+                trailing: SizedBox(
                   width: 100,
                   child: Row(
                     children: [
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/formTarefa',
+                              arguments: tarefa);
+                        },
                         icon: Icon(Icons.edit),
                         color: Colors.green,
                       ),
@@ -76,10 +75,10 @@ class ListaTarefa extends StatelessWidget {
                               context: context,
                               builder: (BuildContext context) {
                                 return AlertDialog(
-                                  content: Text("Tem certeza que deseja excluir? Obs. Está ação não pode ser desfeita"),
+                                  content: Text(
+                                      "Tem certeza que deseja excluir? Obs. Está ação não pode ser desfeita"),
                                   actions: [
                                     ElevatedButton(
-
                                       child: Text("Sim"),
                                       onPressed: () {
                                         FormTarefa form = new FormTarefa();
@@ -87,14 +86,12 @@ class ListaTarefa extends StatelessWidget {
                                             int.parse(tarefa['id'].toString()));
                                         Navigator.pushNamed(context, '/');
                                       },
-
                                     ),
                                     ElevatedButton(
                                       child: Text("Não"),
                                       onPressed: () {
                                         Navigator.pushNamed(context, '/');
                                       },
-
                                     ),
                                   ],
                                 );

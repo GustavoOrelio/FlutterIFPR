@@ -28,12 +28,19 @@ class FormTarefa extends StatelessWidget {
     return linhaAfetada;
   }
 
-
-
   @override
   Widget build(BuildContext context) {
+    int? id;
     String? nome;
     String? descricao;
+
+    var argumento = ModalRoute.of(context)?.settings.arguments;
+    if (argumento != null) {
+      Map<String, Object?> tarefa = argumento as Map<String, Object?>;
+      id = tarefa['id'] as int;
+      nome = tarefa['nome'] as String;
+      descricao = tarefa['descricao'] as String;
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -46,26 +53,26 @@ class FormTarefa extends StatelessWidget {
             decoration: InputDecoration(
                 label: Text('Nome'), hintText: 'Informe o nome da tarefa'),
             onChanged: (valorDigitado) => nome = valorDigitado,
+            initialValue: nome,
           ),
           TextFormField(
             decoration: InputDecoration(
-                label: Text('Descrição'), hintText: 'Informe a descrição da tarefa'),
+                label: Text('Descrição'),
+                hintText: 'Informe a descrição da tarefa'),
             onChanged: (valorDigitado) => descricao = valorDigitado,
+            initialValue: descricao,
           ),
-
           FlatButton(
             color: Colors.black87,
             textColor: Colors.white,
             child: Text('Salvar'),
             onPressed: () {
-                salvar(nome!, descricao!);
-                Navigator.pushNamed(context, '/');
+              salvar(nome!, descricao!, id!);
+              Navigator.pushNamed(context, '/');
 
-               //Para salvar precisa pegar o que foi preenchido nos dois campos e salvar;
+              //Para salvar precisa pegar o que foi preenchido nos dois campos e salvar;
             },
           ),
-
-
         ],
       ),
     );
