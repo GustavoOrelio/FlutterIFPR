@@ -79,6 +79,7 @@ class ListaTarefa extends StatelessWidget {
                                   content: Text("Tem certeza que deseja excluir? Obs. Está ação não pode ser desfeita"),
                                   actions: [
                                     ElevatedButton(
+
                                       child: Text("Sim"),
                                       onPressed: () {
                                         FormTarefa form = new FormTarefa();
@@ -86,6 +87,7 @@ class ListaTarefa extends StatelessWidget {
                                             int.parse(tarefa['id'].toString()));
                                         Navigator.pushNamed(context, '/');
                                       },
+
                                     ),
                                     ElevatedButton(
                                       child: Text("Não"),
