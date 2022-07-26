@@ -1,5 +1,6 @@
 import 'package:crud/view/tarefa_form.dart';
 import 'package:crud/view/tarefa_lista.dart';
+import 'package:crud/view/tarefa_lista_dinamica.dart';
 import 'package:flutter/material.dart';
 
 
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       routes: {
-        '/' :(context) => const TarefaLista(),
+        '/' :(context) => const TarefaListaReativa(),
         '/tarefaForm' :(context) => TarefaForm()
       },
     );
