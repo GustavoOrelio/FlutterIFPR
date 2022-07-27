@@ -1,5 +1,7 @@
-import 'package:crud/view/TarefaForm.dart';
-import 'package:crud/view/TarefaListaReativa.dart';
+import 'package:crud/view/listaTarefa/TarefaForm.dart';
+import 'package:crud/view/listaTarefa/TarefaListaReativa.dart';
+import 'package:crud/view/usuario/UsuarioForm.dart';
+import 'package:crud/view/usuario/UsuarioReativo.dart';
 import 'package:flutter/material.dart';
 
 
@@ -20,8 +22,11 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       routes: {
-        '/' :(context) => const TarefaListaReativa(),
-        '/tarefaForm' :(context) => TarefaForm()
+        // '/' :(context) => const TarefaListaReativa(),
+        // '/tarefaForm' :(context) => TarefaForm()
+
+        '/' :(context) => const UsuarioReativo(),
+        '/usuarioForm' :(context) => UsuarioForm()
       },
     );
   }
