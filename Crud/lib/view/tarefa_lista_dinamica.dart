@@ -39,7 +39,9 @@ class _TarefaListaReativaState extends State<TarefaListaReativa> {
           actions: [
             IconButton(
                 icon: const Icon(Icons.add),
-                onPressed: () => Navigator.pushNamed(context, '/tarefaForm'))
+                onPressed: () => Navigator.pushNamed(context, '/tarefaForm').then((value){
+                  setState((){});
+                }))
           ],
         ),
         body: FutureBuilder(

@@ -1,5 +1,4 @@
 import 'package:crud/view/tarefa_form.dart';
-import 'package:crud/view/tarefa_lista.dart';
 import 'package:crud/view/tarefa_lista_dinamica.dart';
 import 'package:flutter/material.dart';
 
