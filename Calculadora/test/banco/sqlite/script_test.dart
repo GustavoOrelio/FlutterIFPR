@@ -1,8 +1,8 @@
 import 'package:calculadora/banco/sqlite/script.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-void main(){
-  setUp((){});
+void main() {
+  setUp(() {});
   tearDown(() {});
   tearDownAll(() {});
 
@@ -19,7 +19,7 @@ void main(){
 
     test('A lista de comandos deve ser do tipo String', () {
       var comandos = criarBanco;
-      for(var comando in comandos){
+      for (var comando in comandos) {
         expect(comando, isInstanceOf<String>());
       }
     });

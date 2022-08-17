@@ -16,5 +16,7 @@ final criarBanco = [
       usuario_id INTEGER,
       FOREIGN KEY (usuario_id) REFERENCES usuario (id)
     )
-  '''
+  ''',
+  'INSERT INTO usuario (nome, senha) VALUES ("jose", "123")',
+  'INSERT INTO usuario (nome, senha) VALUES ("maria", "123")'
 ];
