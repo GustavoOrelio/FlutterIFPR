@@ -12,4 +12,11 @@ class UsuarioDAO {
     int linhasAfetadas = await _db.rawInsert(_sql, [usuario.nome, usuario.senha]);
     return linhasAfetadas > 0;
   }
+
+  Future<bool> editar(Usuario usuario) async{
+    _db = await Conexao.abrir();
+    _sql = 'UPDATE usuario(id, nome, senha) VALUES (?,?,?)';
+    int linhasAfetadas = await _db.rawInsert(_sql, [usuario.id, usuario.nome, usuario.senha]);
+    return linhasAfetadas > 0;
+  }
 }

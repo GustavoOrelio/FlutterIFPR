@@ -18,11 +18,17 @@ void main() async {
 
   tearDownAll(() {});
 
-  group('Teste Salvar', () {
+  group('Teste Usuario', () {
 
-    test('Testar usuario maior que 0', () async {
+    test('Testar salvar', () async {
       var usuario = Usuario(nome: "Gustavo", senha: "123456");
       var resultado = await DAOUsuario.salvar(usuario);
+      expect(resultado, true);
+    });
+
+    test('Testar editar', () async {
+      var usuario = Usuario(id: 1, nome: "Gustavo", senha: "123456");
+      var resultado = await DAOUsuario.editar(usuario);
       expect(resultado, true);
     });
 
