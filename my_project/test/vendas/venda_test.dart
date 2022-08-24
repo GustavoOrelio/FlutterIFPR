@@ -27,12 +27,6 @@ void main() async {
       expect(resultado, true);
     });
 
-    test('Testando o editar', () async {
-      var venda = Venda(id: 1, nomeProduto: "Cimento", valorProduto: '25.00', formaPagamento: 'Dinheiro');
-      var resultado = await vendasDAO.editar(venda);
-      expect(resultado, true);
-    });
-
   });
 
 }
