@@ -27,6 +27,17 @@ void main() async {
       expect(resultado, true);
     });
 
+    test("Testando alterar", () async {
+      var venda = Venda(nomeProduto: "Cimento", valorProduto: '25.00', formaPagamento: 'Cartão de crédito');
+      var resultado = await vendasDAO.editar(venda);
+      expect(resultado, true);
+    });
+
+    test('teste excluir', () async {
+      var resultado = await vendasDAO.excluir(1);
+      expect(resultado, true);
+    });
+
   });
 
 }
