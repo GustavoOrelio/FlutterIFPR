@@ -18,8 +18,8 @@ class VendaDAO {
   Future<bool> editar(Venda venda) async {
     _bancoDeDados = await Conexao.abrir();
     _sql =
-    'UPDATE venda SET nomeProduto=?, valorProduto=?, formaPagamento=? WHERE id = ?';
-    int linhasAfetadas = await _bancoDeDados.rawInsert(_sql, [
+    'UPDATE venda SET nomeProduto = ?, valorProduto = ?, formaPagamento = ? WHERE id = ?';
+    int linhasAfetadas = await _bancoDeDados.rawUpdate( _sql, [
       venda.id,
       venda.nomeProduto,
       venda.valorProduto,

@@ -21,19 +21,19 @@ void main() async {
 
   group('Testes de Vendas', () {
 
-    test('Testando o salvar', () async {
+    test('Testando salvar', () async {
       var venda = Venda(nomeProduto: "Cimento", valorProduto: '25.00', formaPagamento: 'Cartão de crédito');
       var resultado = await vendasDAO.salvar(venda);
       expect(resultado, true);
     });
 
     test("Testando alterar", () async {
-      var venda = Venda(nomeProduto: "Cimento", valorProduto: '25.00', formaPagamento: 'Cartão de crédito');
+      var venda = Venda(id: 1, nomeProduto: "Cal", valorProduto: '12.00', formaPagamento: 'Dinheiro');
       var resultado = await vendasDAO.editar(venda);
       expect(resultado, true);
     });
 
-    test('teste excluir', () async {
+    test('Testando excluir', () async {
       var resultado = await vendasDAO.excluir(1);
       expect(resultado, true);
     });
