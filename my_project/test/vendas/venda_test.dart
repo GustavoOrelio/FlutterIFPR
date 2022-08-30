@@ -38,6 +38,12 @@ void main() async {
       expect(resultado, true);
     });
 
+    test("Consultar venda", () async {
+      var resultado = await vendasDAO.consultar(1);
+      expect(resultado, isInstanceOf<Venda>());
+    });
+
+
   });
 
 }

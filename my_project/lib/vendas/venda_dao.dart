@@ -41,4 +41,26 @@ class VendaDAO {
       bancoDeDados.close();
     }
   }
+
+  Future<Venda> consultar(int id) async {
+    late Database db;
+    try {
+      const sql = "SELECT * FROM venda WHERE id=?";
+      db = await Conexao.abrir();
+      Map<String, Object?> resultado = (await db.rawQuery(sql, [id])).first;
+      if (resultado.isEmpty) throw Exception('Sem registros com este id');
+      Venda venda = Venda(
+          id: resultado['id'] as int,
+          nomeProduto: resultado['nomeProduto'].toString(),
+          valorProduto: resultado['valorProduto'].toString(),
+          formaPagamento: resultado['formaPagamento'].toString());
+      return venda;
+    } catch (e) {
+      throw Exception('Método de consulta');
+    } finally {
+      db.close();
+    }
+  }
+
+
 }
