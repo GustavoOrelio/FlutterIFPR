@@ -19,12 +19,8 @@ class VendaDAO {
     _bancoDeDados = await Conexao.abrir();
     _sql =
     'UPDATE venda SET nomeProduto = ?, valorProduto = ?, formaPagamento = ? WHERE id = ?';
-    int linhasAfetadas = await _bancoDeDados.rawUpdate( _sql, [
-      venda.id,
-      venda.nomeProduto,
-      venda.valorProduto,
-      venda.formaPagamento
-    ]);
+    int linhasAfetadas = await _bancoDeDados.rawUpdate(
+        _sql, [venda.nomeProduto, venda.valorProduto, venda.formaPagamento, venda.id]);
     return linhasAfetadas > 0;
   }
 
@@ -62,5 +58,26 @@ class VendaDAO {
     }
   }
 
-
+  @override
+  Future<List> listarTodas() async {
+    late Database db;
+    try {
+      const sql = 'SELECT * FROM venda';
+      db = await Conexao.abrir();
+      List<Map<String, Object?>> resultado = (await db.rawQuery(sql));
+      if (resultado.isEmpty) throw Exception('Sem registros');
+      List venda = resultado.map((linha) {
+        return Venda(
+            id: linha['id'] as int,
+            nomeProduto: linha['nomeProduto'].toString(),
+            valorProduto: linha['valorProduto'].toString(),
+            formaPagamento: linha['formaPagamento'].toString());
+      }).toList();
+      return venda;
+    } catch (e) {
+      throw Exception('Método listar');
+    } finally {
+      db.close();
+    }
+  }
 }

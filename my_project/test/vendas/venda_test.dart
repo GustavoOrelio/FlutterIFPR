@@ -8,6 +8,7 @@ import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 void main() async {
   late VendaDAO vendasDAO;
+  late Venda venda;
 
   setUp(() async {
     sqfliteFfiInit();
@@ -15,6 +16,8 @@ void main() async {
     String caminho = join(await getDatabasesPath(), 'venda.db');
     deleteDatabase(caminho);
     vendasDAO = VendaDAO();
+
+     venda = Venda(nomeProduto: "Cimento", valorProduto: '25.00', formaPagamento: 'Cartão de crédito');
   });
 
   tearDownAll(() {});
@@ -28,8 +31,9 @@ void main() async {
     });
 
     test("Testando alterar", () async {
-      var venda = Venda(id: 1, nomeProduto: "Cal", valorProduto: '12.00', formaPagamento: 'Dinheiro');
-      var resultado = await vendasDAO.editar(venda);
+      await vendasDAO.salvar(venda);
+      var vendas = Venda(id: 1, nomeProduto: "Cal", valorProduto: '12.00', formaPagamento: 'Dinheiro');
+      var resultado = await vendasDAO.editar(vendas);
       expect(resultado, true);
     });
 
@@ -43,6 +47,10 @@ void main() async {
       expect(resultado, isInstanceOf<Venda>());
     });
 
+    test("Listar todas vendas", () async {
+      var resultado = await vendasDAO.listarTodas();
+      expect(resultado, isInstanceOf<List<Venda>>());
+    });
 
   });
 

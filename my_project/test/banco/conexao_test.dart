@@ -25,7 +25,7 @@ void main() async {
     });
 
     test('Testar se a venda é maior que 0', () async {
-      var venda = Venda(nomeProduto: "Cimento", valorProduto: '25,00', formaPagamento: 'Dinheiro');
+      var venda = Venda(id: 1, nomeProduto: "Cimento", valorProduto: '25,00', formaPagamento: 'Dinheiro');
       var resultado = await vendasDAO.salvar(venda);
       expect(resultado, true);
     });

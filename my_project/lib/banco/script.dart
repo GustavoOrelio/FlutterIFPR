@@ -7,7 +7,4 @@ final criandoBanco = [
     formaPagamento TEXT NOT NULL
     )
   ''',
-
-  'INSERT INTO venda (nomeProduto, valorProduto, formaPagamento) VALUES ("Cal", "12.50", "Dinheiro")',
-  'INSERT INTO venda (nomeProduto, valorProduto, formaPagamento) VALUES ("Cimento", "25.00", "Cartão de Credito")'
 ];
