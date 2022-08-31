@@ -38,16 +38,19 @@ void main() async {
     });
 
     test('Testando excluir', () async {
+      await vendasDAO.salvar(venda);
       var resultado = await vendasDAO.excluir(1);
       expect(resultado, true);
     });
 
     test("Consultar venda", () async {
+      await vendasDAO.salvar(venda);
       var resultado = await vendasDAO.consultar(1);
       expect(resultado, isInstanceOf<Venda>());
     });
 
     test("Listar todas vendas", () async {
+      await vendasDAO.salvar(venda);
       var resultado = await vendasDAO.listarTodas();
       expect(resultado, isInstanceOf<List<Venda>>());
     });
