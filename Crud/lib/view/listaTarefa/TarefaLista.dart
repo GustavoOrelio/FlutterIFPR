@@ -13,9 +13,6 @@ class TarefaLista extends StatelessWidget{
       version: 1, 
       onCreate: (db, v){
         db.execute('CREATE TABLE tarefa(id INTEGER PRIMARY KEY, nome TEXT, descricao TEXT)');
-        db.execute('INSERT INTO tarefa(nome, descricao) VALUES("Projeto","Projeto Web")');
-        db.execute('INSERT INTO tarefa(nome, descricao) VALUES("Apresentação","Apresentação em grupo")');
-        db.execute('INSERT INTO tarefa(nome, descricao) VALUES("Lista","Lista Exercícios")');
       }, 
     );
     List<Map<String, Object?>> list = await database.rawQuery('SELECT * FROM tarefa');

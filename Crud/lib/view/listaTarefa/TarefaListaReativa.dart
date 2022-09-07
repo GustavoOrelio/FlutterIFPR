@@ -1,35 +1,12 @@
+import 'package:crud/view/listaTarefa/TarefaDAO.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 class TarefaListaReativa extends StatefulWidget {
-  const TarefaListaReativa({Key? key}) : super(key: key);
+  const TarefaListaReativa({Key? key, this.TarefaDAO}) : super(key: key);
 
-  @override
-  State<TarefaListaReativa> createState() => _TarefaListaReativaState();
-}
-
-class _TarefaListaReativaState extends State<TarefaListaReativa> {
-  Future<List<Map<String, Object?>>> consultar() async {
-    String path = join(await getDatabasesPath(), 'banco.db');
-    //deleteDatabase(path);
-    Database database = await openDatabase(
-      path,
-      version: 1,
-    );
-    List<Map<String, Object?>> list =
-    await database.rawQuery('SELECT * FROM tarefa');
-    return list;
-  }
-
-  Future<int> excluir(int id) async {
-    String path = join(await getDatabasesPath(), 'banco.db');
-    Database database = await openDatabase(path, version: 1);
-    int linhasAfetadas =
-    await database.rawDelete('DELETE FROM tarefa WHERE id = ?', [id]);
-    setState((){});
-    return linhasAfetadas;
-  }
+  final TarefaDAO;
 
   @override
   Widget build(BuildContext context) {
@@ -40,12 +17,12 @@ class _TarefaListaReativaState extends State<TarefaListaReativa> {
             IconButton(
                 icon: const Icon(Icons.add),
                 onPressed: () => Navigator.pushNamed(context, '/tarefaForm').then((value){
-                  setState((){});
+
                 }))
           ],
         ),
         body: FutureBuilder(
-            future: consultar(),
+            future: TarefaDAO.consultar(),
             builder:
                 (context, AsyncSnapshot<List<Map<String, Object?>>> snapshot) {
               if (!snapshot.hasData) return const CircularProgressIndicator();
@@ -68,7 +45,7 @@ class _TarefaListaReativaState extends State<TarefaListaReativa> {
                                 Navigator.pushNamed(context, '/tarefaForm',
                                     arguments: tarefa)
                                     .then((value) {
-                                  setState(() {});
+
                                 });
                               },
                             ),
@@ -76,7 +53,7 @@ class _TarefaListaReativaState extends State<TarefaListaReativa> {
                               icon: const Icon(Icons.delete),
                               color: const Color(0xffff0000),
                               onPressed: () {
-                                excluir(tarefa['id'] as int);
+                                TarefaDAO.excluir(tarefa['id'] as int);
                               },
                             )
                           ],
@@ -86,4 +63,13 @@ class _TarefaListaReativaState extends State<TarefaListaReativa> {
                   });
             }));
   }
+
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    throw UnimplementedError();
+  }
 }
+
+
+

@@ -3,28 +3,14 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 // ignore: must_be_immutable
-class TarefaForm extends StatelessWidget{
+class TarefaForm extends StatefulWidget{
   dynamic id;
   String? nome;
   String? descricao;
 
-  TarefaForm({Key? key}) : super(key: key);
+  TarefaForm({Key? key, this.TarefaDAO}) : super(key: key);
 
-  Future<int> salvar() async {
-    String path = join(await getDatabasesPath(), 'banco.db');
-    //deleteDatabase(path);
-    Database database = await openDatabase(path,version: 1);
-    String sql;
-    Future<int> linhasAfetadas;
-    if(id == null){
-      sql = 'INSERT INTO tarefa (nome, descricao) VALUES (?,?)';
-      linhasAfetadas = database.rawInsert(sql,[nome,descricao]);
-    }else{
-      sql = 'UPDATE tarefa SET nome = ?, descricao =? WHERE id = ?';
-      linhasAfetadas = database.rawUpdate(sql,[nome, descricao, id]);
-    }
-    return linhasAfetadas;
-  }
+  final TarefaDAO;
 
   Widget _criarCampo(String rotulo, String? dica, ValueChanged<String>? vincularValor, String? valorInicial){
     return TextFormField(  
@@ -53,7 +39,7 @@ class TarefaForm extends StatelessWidget{
           IconButton(
             icon: const Icon(Icons.save),
             onPressed: (){
-              salvar();
+              TarefaDAO.salvar();
               Navigator.pop(context);
             }
           ), 
@@ -68,5 +54,11 @@ class TarefaForm extends StatelessWidget{
         ),
       )
     );
+  }
+
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    throw UnimplementedError();
   }
 }
