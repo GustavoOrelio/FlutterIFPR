@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_components/menu_dois.dart';
 import 'package:flutter_components/menu_um.dart';
 
 void main() {
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MenuUm(title: 'Flutter Demo Home Page'),
+      home: const MenuDois(title: 'Flutter Demo Home Page'),
     );
   }
 }
